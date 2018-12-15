@@ -1,0 +1,49 @@
+<div class="container">
+  <div class='card'>
+    <div class='card-header'>
+      {{pageTitle}}
+    </div>
+    <div class='card-body'>
+      <div class='row'>
+        <div class='col-md-2'>Filter by:</div>
+        <div class='col-md-4'>
+          <input type='text'
+                 [(ngModel)]='listFilter' class="form-control" />
+        </div>
+      </div>
+      <div class='row'
+          >
+        <div class='col-md-6'>
+          <h4>Filter by: {{listFilter}}</h4>
+        </div>
+      </div>
+      <div class='table-responsive'>
+        <table class='table'
+               *ngIf='customers && customers.length'>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Active</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let customer of filteredCustomers">
+                <td>
+                  <a [routerLink]="['/customer/view', customer.id]">{{customer.id}}</a>
+                </td>
+                <td>{{customer.firstName}}</td>
+                <td>{{customer.lastName}}</td>
+                <td>{{customer.isActive}}</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>  
+</div>
+<div *ngIf='errorMessage'
+     class='alert alert-danger'>
+  Error: {{ errorMessage }}
+</div>
