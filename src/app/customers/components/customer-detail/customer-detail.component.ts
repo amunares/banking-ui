@@ -13,16 +13,12 @@ import { Router } from '@angular/router';
 export class CustomerDetailComponent implements OnInit {
   pageTitle = 'Customer Detail';
   errorMessage = '';
-  customer: ICustomer | undefined;
+  customer;
 
   constructor(private customerService: CustomerService, private route: ActivatedRoute,private router: Router) { }
 
   ngOnInit() {
-    const param = this.route.snapshot.paramMap.get('id');
-    if (param) {
-      const id = +param;
-      this.getCustomer(id);
-    }
+    this.getCustomer(this.route.snapshot.params.id);
   }
 
   getCustomer(id: number) {

@@ -14,14 +14,14 @@ export class CustomerService {
     constructor(private http:HttpClient) { }
 
     getCustomers() {
-      return this.http.get('/server/api/customers').pipe(
+      return this.http.get<any>('/server/api/customers').pipe(
         tap(data => console.log('All: '+ JSON.stringify(data))),
         catchError(this.handleError)
       );
     }
 
-    getCustomer(id: number): Observable<ICustomer | undefined> {
-      return this.http.get('/server/api/customers/'+ id).pipe(
+    getCustomer(id: number){
+      return this.http.get<any>('/server/api/customers/'+ id).pipe(
         tap(data => console.log('Customer: '+ JSON.stringify(data))),
         catchError(this.handleError)
       );

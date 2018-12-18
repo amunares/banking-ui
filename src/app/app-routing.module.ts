@@ -3,28 +3,39 @@ import { Routes, RouterModule } from '@angular/router';
 import { CustomerListComponent } from 'src/app/customers/components/customer-list/customer-list.component';
 import { WelcomeComponent } from './home/components/welcome.component';
 import { CustomerDetailComponent } from './customers/components/customer-detail/customer-detail.component';
+import { LoginComponent } from 'src/app/authentication/components/login/login.component';
+import { AuthGuard } from 'src/app/authentication/services/auth.guard';
 
 const routes: Routes = [
-  
+
   {
     path: 'customer/view/:id',
-    component: CustomerDetailComponent
+    component: CustomerDetailComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'customer-list',
-    component: CustomerListComponent
+    component: CustomerListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'welcome',
-    component: WelcomeComponent
+    component: WelcomeComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: '',
-    redirectTo: 'welcome', pathMatch: 'full'
+    redirectTo: 'welcome', pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
-    redirectTo: 'welcome', pathMatch: 'full'
+    redirectTo: 'welcome', pathMatch: 'full',
+    canActivate: [AuthGuard]
   }  
 ];
 
